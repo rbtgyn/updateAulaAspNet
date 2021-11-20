@@ -1,6 +1,4 @@
-﻿
-
-namespace salleswebmvc.Models
+﻿namespace salleswebmvc.Models
 {
     public class Department
     {
