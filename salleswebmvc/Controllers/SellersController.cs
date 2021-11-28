@@ -21,5 +21,10 @@ namespace salleswebmvc.Controllers
             var list = _sellerService.FindAll();
             return View(list);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
