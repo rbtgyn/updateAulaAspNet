@@ -6,7 +6,7 @@ using salleswebmvc.Services;
 using salleswebmvc.Models;
 using salleswebmvc.Data;
 using Microsoft.EntityFrameworkCore;
-
+using salleswebmvc.Services.Exceptions;
 
 namespace salleswebmvc.Services
 {
@@ -40,6 +40,24 @@ namespace salleswebmvc.Services
             
             _context.Add(obj);
             _context.SaveChanges();
+        }
+
+        public void Update(Seller obj)
+        {
+            if(!_context.Seller.Any(x => x.Id == obj.Id))
+            {
+                throw new NotFoundException("Id not found");
+            }
+            try
+            {
+                _context.Update(obj);
+                _context.SaveChanges();
+            }
+
+            catch (DbUpdateConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
         }
     }
 }
